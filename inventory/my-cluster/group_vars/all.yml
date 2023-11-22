@@ -1,5 +1,5 @@
 ---
-k3s_version: v1.25.12+k3s1
+k3s_version: v1.28.3+k3s2
 # this is the user that has ssh access to these machines
 ansible_user: pi
 systemd_dir: /etc/systemd/system
@@ -30,11 +30,6 @@ extra_args: >-
   --flannel-iface={{ flannel_iface }}
   --node-ip={{ k3s_node_ip }}
 
-# --kube-controller-manager-arg bind-address=0.0.0.0 
-# --kube-proxy-arg metrics-bind-address=0.0.0.0 
-# --kube-scheduler-arg bind-address=0.0.0.0 
-# --etcd-expose-metrics true 
-# --kubelet-arg containerd=/run/k3s/containerd/containerd.sock
 # change these to your liking, the only required are: --disable servicelb, --tls-san {{ apiserver_endpoint }}
 extra_server_args: >-
   {{ extra_args }}
@@ -42,7 +37,6 @@ extra_server_args: >-
   --tls-san {{ apiserver_endpoint }}
   --disable servicelb
   --disable traefik
-
 extra_agent_args: >-
   {{ extra_args }}
 
